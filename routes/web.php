@@ -21,4 +21,7 @@ $router->group(['prefix' => 'api'], function($app) {
     $app->delete('/todo/{id}', 'TodoController@destroy');
 });
 
-$router->get('/view', 'UsersController@view');
+$router->get('/index', 'UsersController@index');
+$router->get('/about', 'UsersController@about');
+$router->get('/products', 'UsersController@products');
+$router->get('/store', 'UsersController@store');

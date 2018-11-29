@@ -35,9 +35,23 @@ class UsersController extends Controller
         }
     }
 
-    public function view()
+    public function index()
     {
-        $jithin = 'hai there';
-        return view('index', compact('jithin'));
+        return view('index');
+    }
+
+    public function about()
+    {
+        return view('about');
+    }
+
+    public function products()
+    {
+        return view('products');
+    }
+
+    public function store()
+    {
+        return view('store');
     }
 }
