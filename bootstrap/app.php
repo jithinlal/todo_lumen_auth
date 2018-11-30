@@ -48,6 +48,9 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+$app->singleton(Illuminate\Session\SessionManager::class, function () use ($app) {
+    return new Illuminate\Session\SessionManager($app);
+});
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -59,13 +62,22 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    \Illuminate\Session\Middleware\StartSession::class,
+    App\Http\Middleware\VerifyCsrfToken::class,
+]);
+
+$app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
+    return new \Illuminate\Session\SessionManager($app);
+});
+
+$app->configure('session');
+$app->register(\Illuminate\Session\SessionServiceProvider::class);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
+
 
 /*
 |--------------------------------------------------------------------------

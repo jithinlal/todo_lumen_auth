@@ -67,34 +67,16 @@
                 <span class="section-heading-lower">We're Open</span>
               </h2>
               <ul class="list-unstyled list-hours mb-5 text-left mx-auto">
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Sunday
-                  <span class="ml-auto">Closed</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Monday
-                  <span class="ml-auto">7:00 AM to 8:00 PM</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Tuesday
-                  <span class="ml-auto">7:00 AM to 8:00 PM</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Wednesday
-                  <span class="ml-auto">7:00 AM to 8:00 PM</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Thursday
-                  <span class="ml-auto">7:00 AM to 8:00 PM</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Friday
-                  <span class="ml-auto">7:00 AM to 8:00 PM</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Saturday
-                  <span class="ml-auto">9:00 AM to 5:00 PM</span>
-                </li>
+                  @foreach ($days as $day)
+                      <li class="list-unstyled-item list-hours-item d-flex">
+                        {{ $day->day }}
+                        @if($day->start_time == $day->end_time)
+                            <span class="ml-auto">Closed</span>
+                        @else
+                            <span class="ml-auto">{{ \Carbon\Carbon::parse($day->start_time)->format('g:i A') }} to {{ \Carbon\Carbon::parse($day->end_time)->format('g:i A') }}</span>
+                        @endif
+                      </li>
+                  @endforeach                
               </ul>
               <p class="address mb-5">
                 <em>

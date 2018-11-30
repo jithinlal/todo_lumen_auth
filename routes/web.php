@@ -25,3 +25,13 @@ $router->get('/index', 'UsersController@index');
 $router->get('/about', 'UsersController@about');
 $router->get('/products', 'UsersController@products');
 $router->get('/store', 'UsersController@store');
+
+$router->get('/admin/login', 'AdminController@login');
+$router->post('/admin/signin', 'AdminController@signin');
+$router->get('/admin/change-pass', 'AdminController@change');
+$router->group(['middleware' => 'auth'], function($app) {
+    $app->get('/admin/home', 'AdminController@home');
+    $app->get('/admin/get-day-time', 'AdminController@getTime');
+    $app->get('/admin/edit-day-time', 'AdminController@editTIme');
+    $app->get('/admin/logout', 'AdminController@logout');
+});

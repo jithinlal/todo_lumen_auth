@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Time;
 use App\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -52,6 +53,7 @@ class UsersController extends Controller
 
     public function store()
     {
-        return view('store');
+        $days = Time::all();
+        return view('store', compact('days'));
     }
 }
